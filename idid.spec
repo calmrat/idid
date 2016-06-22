@@ -25,8 +25,7 @@ given day, week, month, quarter, year or selected date range.
 %install
 mkdir -p %{buildroot}%{_bindir}
 mkdir -p %{buildroot}%{_mandir}/man1
-mkdir -p %{buildroot}%{python_sitelib}/did
-mkdir -p %{buildroot}%{python_sitelib}/did/plugins
+mkdir -p %{buildroot}%{python_sitelib}/idid
 install -pm 755 bin/idid %{buildroot}%{_bindir}/idid
 install -pm 644 idid/*.py %{buildroot}%{python_sitelib}/idid
 install -pm 644 idid.1.gz %{buildroot}%{_mandir}/man1
@@ -41,5 +40,5 @@ install -pm 644 idid.1.gz %{buildroot}%{_mandir}/man1
 %license LICENSE
 
 %changelog
-* Fri June 17 2016 Chris Ward <kejbaly2@gmail.com> 0.1-1
+* Fri Jun 17 2016 Chris Ward <kejbaly2@gmail.com> 0.1-1
 - Forked from github.com/psss/did as separate app
