@@ -136,7 +136,7 @@ class LoggOptions(Options):
         default_journal = self.config.get('default_journal')
         _journals = self.config.get('journals') or {}
 
-        log.debug(' ... got [{0}] args'.format(k_args))
+        log.debug(' ... got {0} args [{1}]'.format(k_args, args))
         if k_args == 0 and default_journal:
             # launch the editor to save a message into 'default' branch
             # FIXME: 'unsorted' should be configurable as 'default branch'

@@ -13,7 +13,6 @@ import sys
 import logging
 import unicodedata
 
-from dateutil.relativedelta import MO as MONDAY
 from dateutil.relativedelta import relativedelta as delta
 from dateutil.parser import parse as dt_parse
 import pytz
@@ -457,8 +456,7 @@ class Date(object):
                 date = dt_parse(date)
             else:
                 raise ValueError
-        except Exception as error:
-            log.warn(error)
+        except ValueError:
             raise ValueError(
                 "Invalid date format: {0}('{1}'), use YYYY-MM-DD.".format(
                     type(date), date))

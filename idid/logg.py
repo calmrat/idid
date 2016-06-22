@@ -74,18 +74,18 @@ DEFAULT_LOGG_RECORD = """
 # EXAMPLE MODULE USAGE
 
     >>> from idid import logg
-    >>> l = logg.Logg(config)
-    >>> l.logg_record('joy', '@kejbaly2 merged my pull requests!', 'yesterday')
+    >>> l = logg.Logg(config, 'joy')
+    >>> l.logg_record('@kejbaly2 merged my pull requests!', 'yesterday')
 
 # EXAMPLE CONFIG (YAML)
 
     default_engine: txt:///tmp/logg.txt
 
     project_x:
-    desc: Secrete Project X
+        desc: Secrete Project X
 
     joy:
-        - engine: git:///tmp/logg.git
+        engine: git:///tmp/logg.git
         desc: Joy of the Day!
 
 
@@ -385,7 +385,7 @@ class GitLogg(Logg):
 
         try:
             _logg_repo = git.Repo(self._engine_path)
-            log.info('Loaded git repo [{0}]'.format(self._engine_path))
+            log.debug('Loaded git repo [{0}]'.format(self._engine_path))
         except Exception:
             # FIXME: should this be automatic?
             # log.error("Git repo doesn't exist! run ``idid init``")
