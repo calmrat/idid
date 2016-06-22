@@ -287,8 +287,8 @@ class GitLogg(Logg):
         # LOAD SYNC_TO options from config PER JOURNAL
         # ie, sync to remote (friends) journals too
         # ENABLE syncing to multiple (remotee) branches
-        #sync_to = None
-        #if sync_to:
+        # sync_to = None
+        # if sync_to:
         #    # sync/backup branch (eg, master or remote)
         #    log.info(' ... ... also syncing to: {0}'.format(sync_to))
         #    record = '{0} [{1}]'.format(record, self._journal)
@@ -365,6 +365,7 @@ class GitLogg(Logg):
 
     def _init_repo(self):
         """ create and initialize a new Git Repo """
+        log.debug("initializing new Git Repo: {0}".format(self._engine_path))
         if os.path.exists(self._engine_path):
             log.error("Path already exists! Aborting!")
             raise RuntimeError
@@ -372,7 +373,7 @@ class GitLogg(Logg):
             # create the repo if it doesn't already exist
             _logg_repo = git.Repo.init(path=self._engine_path, mkdir=True)
             record = "idid Logg repo initialized on {0}".format(today())
-            c = self._logg_repo.index.commit(record)
+            c = _logg_repo.index.commit(record)
             assert c.type == 'commit'
             log.info('Created git repo [{0}]'.format(self._engine_path))
         return _logg_repo

@@ -30,7 +30,7 @@ import idid.utils as utils
 from idid.utils import log
 from idid.logg import Logg, DT_ISO_FMT
 
-DEFAULT_IDID_CONFIG = '~/.idid/config.yaml'
+DEFAULT_IDID_CONFIG = os.path.expanduser('~/.idid/config.yaml')
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #  Options
@@ -73,10 +73,8 @@ class Options(object):
 
         # Add quiet, which overrides debug if both are issued
         self.parser.add_argument(
-            "--config-file", type=str,
+            "--config-file", type=str, default=DEFAULT_IDID_CONFIG,
             help="Customize the location of the idid yaml config file")
-
-        # FIXME: ADD --config-path
 
     def parse(self, arguments=None):
         """ Parse the shared [i]did arguments """
@@ -99,9 +97,9 @@ class Options(object):
 
         if not opts.config_file:
             opts.config_file = os.path.expanduser(DEFAULT_IDID_CONFIG)
-            opts.config = Configuration().from_file(opts.config_file)
-            # alias shortcut
-            self.config = opts.config
+        opts.config = Configuration().from_file(opts.config_file)
+        # alias shortcut
+        self.config = opts.config
 
         # if we're passing arguments in as a string we might get \n's or null
         # strings '' that we want to be sure to ignore
@@ -247,18 +245,18 @@ def main(arguments=None, config=None):
     Pass optional parameter ``arguments`` as either command line
     string or list of options. This is mainly useful for testing.
 
-    ``config`` can be passed in as a string to access user defined
-    values for important variables manually. This is mainly useful
-    for testing.
+    ``config`` can be passed in as a path or string to access user defined
+    values for important variables manually. YAML only.
 
-    returns the saved logg string.
+    Returns the saved logg string.
 
     """
     # Parse options, initialize gathered stats
     options = LoggOptions(arguments=arguments).parse()
 
+    # FIXME: pass in only config; set config.journal = options.journal
     if not config:
-        config = options.config
+        config = options.config_file
 
     logg = Logg(config, options.journal)
 
