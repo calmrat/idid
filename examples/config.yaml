@@ -1,0 +1,16 @@
+default_engine: txt:///tmp/logg.txt
+
+default_journal: general
+
+#gpg: 1C725D56
+
+journals:
+    general:
+        desc: Unsorted Activities
+
+    project_x:
+        desc: Secrete Project X
+
+    joy:
+        desc: Joy of the Day!
+        engine: git:///tmp/logg.git
