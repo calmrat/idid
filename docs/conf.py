@@ -19,16 +19,18 @@ try:
     # use bootstrap theme if user has it installed
     import sphinx_bootstrap_theme
     HTML_THEME = 'bootstrap'
-    html_theme_path = [sphinx_bootstrap_theme.get_html_theme_path()]
+    html_theme_path = sphinx_bootstrap_theme.get_html_theme_path()
 except ImportError:
     try:
         # fall back to sphinx_rtd_theme if available
         import sphinx_rtd_theme
         HTML_THEME = 'sphinx_rtd_theme'
-        html_theme_path = [sphinx_rtd_theme.get_html_theme_path()]
+        html_theme_path = sphinx_rtd_theme.get_html_theme_path()
     except ImportError:
         # and fall back to 'default' if neither of those are available
         HTML_THEME = 'default'
+
+print html_theme_path, "8"*100
 
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the
@@ -63,9 +65,9 @@ master_doc = 'index'
 master_man = 'man.1'
 
 # General information about the project.
-project = u'did'
-copyright = u'2015, Petr Šplíchal'
-author = u'Petr Šplíchal'
+project = u'idid'
+copyright = u'2016, Chris Ward'
+author = u'Chris Ward'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -225,14 +227,14 @@ html_static_path = ['_static']
 #html_search_scorer = 'scorer.js'
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = 'diddoc'
+htmlhelp_basename = 'ididdoc'
 
 # -- Options for manual page output ---------------------------------------
 
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    (master_man, 'did', u'did Documentation',
+    (master_man, 'idid', u'idid Documentation',
      [author], 1)
 ]
 
